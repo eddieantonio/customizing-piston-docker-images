@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  # Use this container to install Piston packages ONLY:
+  # DO NOT use this in production!
+  piston-build:
+    image: ghcr.io/eddieantonio/piston:20231101
+    container_name: piston-builder
+    ports:
+      - "2000:2000"
+    volumes:
+      - ./data/piston/packages:/piston/packages
+    tmpfs:
+      - /piston/jobs:exec,uid=1000,gid=1000,mode=711
+      - /tmp:exec
